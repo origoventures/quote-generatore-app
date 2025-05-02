@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GitHub Model Context Protocol (MCP)
 
-## Getting Started
+## Overview
+Model Context Protocol (MCP) is a standardized way for AI models to interact with external services and tools, particularly focusing on GitHub operations. It provides a structured approach to handling GitHub-related tasks programmatically while maintaining security and consistency.
 
-First, run the development server:
+## What is MCP?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+MCP (Model Context Protocol) is a protocol that enables:
+- Standardized communication between AI models and external services
+- Secure handling of API tokens and credentials
+- Consistent interface for common operations
+- Extensible framework for adding new capabilities
+
+## Key Components
+
+### 1. MCP Servers
+- Dedicated servers that handle specific service integrations
+- Example: GitHub MCP server handles all GitHub-related operations
+- Provides abstraction layer between AI models and actual API calls
+
+### 2. Profiles
+- Configuration units that store:
+  - Authentication details
+  - User preferences
+  - Service-specific settings
+- Allows multiple configurations for different use cases
+
+### 3. Commands
+Common GitHub operations supported through MCP:
+- Repository creation and management
+- File operations (create, read, update, delete)
+- Issue and PR management
+- Webhook handling
+- User and organization management
+
+## Configuration
+
+### Basic Setup
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@smithery-ai/github",
+        "--key",
+        "YOUR_KEY",
+        "--profile",
+        "YOUR_PROFILE"
+      ]
+    }
+  }
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Required Permissions
+For GitHub operations:
+- **Administration (read/write)**: For repository management
+- **Contents (read/write)**: For file operations
+- **Metadata**: Always required (mandatory)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage Examples
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Creating a Repository
+```bash
+npx -y @smithery/cli@latest run @smithery-ai/github --key YOUR_KEY --profile YOUR_PROFILE create-repo --name repo-name --description "Description" --public
+```
 
-## Learn More
+### Managing Files
+```bash
+npx -y @smithery/cli@latest run @smithery-ai/github --key YOUR_KEY --profile YOUR_PROFILE create-file --repo repo-name --path path/to/file --content "content"
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Best Practices
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Security**
+   - Never expose MCP keys in public repositories
+   - Use appropriate scopes for tokens
+   - Regularly rotate credentials
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Error Handling**
+   - Always check for operation success
+   - Handle rate limits appropriately
+   - Implement proper logging
 
-## Deploy on Vercel
+3. **Performance**
+   - Batch operations when possible
+   - Cache frequently accessed data
+   - Use appropriate timeouts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Common Issues and Solutions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Server Initialization Errors**
+   - Check server status
+   - Verify profile configuration
+   - Ensure proper permissions
+
+2. **Authentication Issues**
+   - Verify token validity
+   - Check permission scopes
+   - Confirm profile settings
+
+3. **Operation Failures**
+   - Review error messages
+   - Check rate limits
+   - Verify resource existence
+
+## Contributing
+
+We welcome contributions to improve the MCP ecosystem:
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Resources
+
+- [MCP Documentation](https://docs.mcp.dev)
+- [GitHub API Documentation](https://docs.github.com/en/rest)
+- [Smithery CLI Documentation](https://smithery.dev/docs)

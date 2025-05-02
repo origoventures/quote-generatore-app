@@ -1,0 +1,31 @@
+.themeToggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-size: 1.5rem;
+  z-index: 1000;
+  transition: transform 0.2s;
+}
+
+.themeToggle:hover {
+  transform: scale(1.1);
+}
+
+.backgroundImage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  transition: background-image 0.5s ease-in-out;
+  will-change: background-image;
+} 

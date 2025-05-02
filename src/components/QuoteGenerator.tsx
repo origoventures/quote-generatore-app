@@ -1,15 +1,24 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import styles from './page.module.css';
-import ThemeToggle from '@/components/ThemeToggle';
-import QuoteGenerator from '@/components/QuoteGenerator';
-import themeStyles from '@/components/ThemeToggle.module.css';
+import styles from './QuoteGenerator.module.css';
+import { setBackgroundImage, getRandomImage } from '@/utils/background';
+import { useTheme } from 'next-themes';
+import themeStyles from './ThemeToggle.module.css';
 
-export default function Home() {
+export default function QuoteGenerator() {
   const [quote, setQuote] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
+  const { theme } = useTheme();
+
+  const updateBackground = async () => {
+    const backgroundImage = document.querySelector(`.${themeStyles.backgroundImage}`) as HTMLElement;
+    if (backgroundImage) {
+      const newImage = await getRandomImage();
+      setBackgroundImage(backgroundImage, newImage, theme === 'dark');
+    }
+  };
 
   const fetchQuote = async () => {
     setLoading(true);
@@ -53,6 +62,7 @@ export default function Home() {
       setAuthor(randomQuote.author);
     }
     setLoading(false);
+    await updateBackground();
   };
 
   useEffect(() => {
@@ -60,15 +70,23 @@ export default function Home() {
   }, []);
 
   return (
-    <main className={styles.main}>
-      <div className={themeStyles.backgroundImage}></div>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <h1 className={styles.title}>Daily Motivation</h1>
-          <QuoteGenerator />
-        </div>
+    <>
+      <div className={styles.quoteCard}>
+        {loading ? (
+          <div className={styles.loading}>Loading...</div>
+        ) : (
+          <>
+            <p className={styles.quote}>{quote}</p>
+            <p className={styles.author}>- {author}</p>
+          </>
+        )}
       </div>
-      <ThemeToggle />
-    </main>
+      <button
+        onClick={fetchQuote}
+        className={styles.button}
+      >
+        New Quote
+      </button>
+    </>
   );
-}
+} 

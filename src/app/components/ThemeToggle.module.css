@@ -1,0 +1,28 @@
+.themeToggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  z-index: 1000;
+}
+
+.themeToggle:hover {
+  background-color: rgba(128, 128, 128, 0.1);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.themeToggle:hover .icon {
+  transform: rotate(15deg);
+} 
