@@ -69,9 +69,6 @@ export default function Home() {
           <div className={styles.quoteCard}>
             <QuoteGenerator />
           </div>
-          <div className="mt-4">
-            <FeedbackCarousel />
-          </div>
         </div>
       </div>
       <ThemeToggle />

@@ -8,7 +8,7 @@
   --accent: #0070f3;
 }
 
-[data-theme='light'] {
+.light {
   --foreground: #000000;
   --background: #ffffff;
   --card-bg: rgba(255, 255, 255, 0.5);
