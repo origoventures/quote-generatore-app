@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import styles from './page.module.css';
 import ThemeToggle from '@/components/ThemeToggle';
 import QuoteGenerator from '@/components/QuoteGenerator';
+import FeedbackCarousel from '@/components/FeedbackCarousel';
 import themeStyles from '@/components/ThemeToggle.module.css';
 
 export default function Home() {
@@ -65,7 +66,12 @@ export default function Home() {
       <div className={styles.container}>
         <div className={styles.content}>
           <h1 className={styles.title}>Daily Motivation</h1>
-          <QuoteGenerator />
+          <div className={styles.quoteCard}>
+            <QuoteGenerator />
+          </div>
+          <div className="mt-4">
+            <FeedbackCarousel />
+          </div>
         </div>
       </div>
       <ThemeToggle />

@@ -70,7 +70,7 @@ export default function QuoteGenerator() {
   }, []);
 
   return (
-    <>
+    <div className="space-y-4">
       <div className={styles.quoteCard}>
         {loading ? (
           <div className={styles.loading}>Loading...</div>
@@ -81,12 +81,14 @@ export default function QuoteGenerator() {
           </>
         )}
       </div>
-      <button
-        onClick={fetchQuote}
-        className={styles.button}
-      >
-        New Quote
-      </button>
-    </>
+      <div className="mt-8">
+        <button
+          onClick={fetchQuote}
+          className={styles.button}
+        >
+          New Quote
+        </button>
+      </div>
+    </div>
   );
 } 
