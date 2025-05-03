@@ -72,7 +72,7 @@ export default function QuoteGenerator() {
   }, []);
 
   return (
-    <div className="max-w-3xl mx-auto p-6 pb-12 min-h-[560px] bg-white/10 dark:bg-black/10 backdrop-blur-lg rounded-xl shadow-2xl flex flex-col">
+    <div className="max-w-3xl mx-auto p-6 pb-16 min-h-[560px] bg-white/10 dark:bg-black/10 backdrop-blur-lg rounded-xl shadow-2xl flex flex-col relative">
       {/* Quote Box */}
       <div className={`${styles.quoteCard} w-full mb-8`}>
         {loading ? (
@@ -97,7 +97,7 @@ export default function QuoteGenerator() {
       </div>
 
       {/* New Quote Button */}
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center absolute left-1/2 -translate-x-1/2" style={{ bottom: 10 }}>
         <button
           onClick={fetchQuote}
           className={`${styles.button} px-12 py-4 text-base w-48`}
