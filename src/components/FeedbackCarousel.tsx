@@ -74,7 +74,7 @@ export default function FeedbackCarousel({ currentQuote, currentAuthor }: Props)
 
       setFeedbacks(feedbacksWithImages);
     } catch (error) {
-      console.error('Error generating feedback:', error);
+      // Silenzio l'errore per evitare log in console
     } finally {
       setIsGenerating(false);
     }
@@ -105,11 +105,21 @@ export default function FeedbackCarousel({ currentQuote, currentAuthor }: Props)
   if (!mounted) return null;
 
   if (feedbacks.length === 0) {
-    return isGenerating ? (
-      <div className="flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 dark:border-blue-400"></div>
-      </div>
-    ) : null;
+    if (isGenerating) {
+      return (
+        <div className="flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 dark:border-blue-400"></div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="w-full max-w-2xl mx-auto mb-4 h-64 mt-12 flex items-center justify-center">
+          <div className="text-gray-700 dark:text-gray-300 text-lg font-semibold">
+            Feedback non disponibili al momento.
+          </div>
+        </div>
+      );
+    }
   }
 
   return (
