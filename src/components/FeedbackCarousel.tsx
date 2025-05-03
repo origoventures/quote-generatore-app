@@ -95,7 +95,7 @@ export default function FeedbackCarousel({ currentQuote, currentAuthor }: Props)
         const nextIndex = currentIndex === feedbacks.length - 1 ? 0 : currentIndex + 1;
         updateSlide(nextIndex);
       }
-    }, 8000);
+    }, 20000);
 
     return () => clearInterval(timer);
   }, [currentIndex, mounted, feedbacks.length]);
@@ -125,7 +125,7 @@ export default function FeedbackCarousel({ currentQuote, currentAuthor }: Props)
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto mb-4 h-64 mt-12">
+    <div className="w-full max-w-[550px] mx-auto mb-4 mt-12 pb-5">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
@@ -134,8 +134,8 @@ export default function FeedbackCarousel({ currentQuote, currentAuthor }: Props)
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.5 }}
         >
-          <div className={`${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} rounded-lg p-8 shadow-lg h-full`}>
-            <div className={`flex items-start space-x-6 h-full border ${theme === 'dark' ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-gray-50'} rounded-lg p-6`}>
+          <div className={"rounded-lg"}>
+            <div className={`flex items-start space-x-6 rounded-lg p-5`}>
               <div className="relative w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
                 <Image
                   src={`${feedbacks[currentIndex].imageUrl}?v=${imageVersion}`}
@@ -145,10 +145,14 @@ export default function FeedbackCarousel({ currentQuote, currentAuthor }: Props)
                   priority
                 />
               </div>
-              <div className="flex-1 flex flex-col justify-between h-full">
-                <p className={`${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'} text-base italic leading-relaxed`}>
-                  {feedbacks[currentIndex].text}
-                </p>
+              <div className="flex-1 flex flex-col justify-between p-2.5">
+                {feedbacks[currentIndex].text.trim() ? (
+                  <p className={`${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'} text-base italic leading-relaxed`}>
+                    {feedbacks[currentIndex].text}
+                  </p>
+                ) : (
+                  <p className="text-gray-400 italic">Feedback non disponibile.</p>
+                )}
                 <div className="text-right mt-4">
                   <h3 className={`${theme === 'dark' ? 'text-white' : 'text-gray-900'} font-semibold`}>
                     {feedbacks[currentIndex].author}
@@ -162,12 +166,11 @@ export default function FeedbackCarousel({ currentQuote, currentAuthor }: Props)
           </div>
         </motion.div>
       </AnimatePresence>
-      
-      <div className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="w-full flex justify-center items-center mt-12 h-12">
         {feedbacks.map((_, index) => (
           <button
             key={index}
-            className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+            className={`w-2 h-2 rounded-full transition-colors duration-200 mx-1 ${
               index === currentIndex ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'
             }`}
             onClick={() => handleDotClick(index)}

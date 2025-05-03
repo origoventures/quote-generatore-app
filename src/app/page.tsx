@@ -63,12 +63,20 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={themeStyles.backgroundImage}></div>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <h1 className={styles.title}>Daily Motivation</h1>
-          <div className={styles.quoteCard}>
-            <QuoteGenerator />
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <div className="max-w-xl w-full bg-white/10 dark:bg-black/10 rounded-xl shadow-2xl flex flex-col justify-between items-center p-8 min-h-[600px]">
+          <div className="flex-1 flex flex-col gap-8 w-full">
+            <h1 className="text-2xl font-bold text-center mb-6">Daily Motivation</h1>
+            <QuoteGenerator quote={quote} author={author} loading={loading} />
           </div>
+          <button
+            onClick={fetchQuote}
+            className="px-12 py-5 min-w-[180px] rounded-lg text-base font-semibold shadow transition-all duration-200
+              bg-blue-500 text-white hover:bg-blue-600
+              dark:bg-gray-800 dark:text-blue-100 dark:hover:bg-gray-700"
+          >
+            New Quote
+          </button>
         </div>
       </div>
       <ThemeToggle />
